@@ -61,6 +61,9 @@ export default function Users() {
               {user.website}
             </Link>
           </p>
+          <p> Company: {user.company.name}</p>
+          <p> Catch Phrase: {user.company.catchPhrase}</p>
+          <p> Bs: {user.company.bs}</p>
         </div>
       </div>
     </div>
