@@ -1,6 +1,7 @@
 import type { MetaFunction } from "@remix-run/node";
 import { Link } from "@remix-run/react";
 import { useEffect, useState } from "react";
+import { ArrowRight } from "react-feather";
 import { UserInterface } from "~/types/user";
 
 export const meta: MetaFunction = () => {
@@ -46,12 +47,17 @@ export default function Users() {
 
   return (
     <div className='flex items-center justify-center flex-col'>
-      <h1>Users:</h1>
-      <ul>
+      <h1 className='font-semibold text-3xl py-2'> Users: </h1>
+      <ul className='flex flex-col gap-2 py-2'>
         {users &&
           users.map((user, index) => (
             <li key={index}>
-              <Link to={`/users/${user.id}`}>{user.name}</Link>
+              <Link
+                to={`/users/${user.id}`}
+                className='text-yellow-600 flex items-center gap-2 underline underline-offset-4'
+              >
+                {user.name} <ArrowRight size={20} />
+              </Link>
             </li>
           ))}
       </ul>

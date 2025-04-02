@@ -1,5 +1,5 @@
 import { LoaderFunction } from "@remix-run/node";
-import { json, useLoaderData } from "@remix-run/react";
+import { json, Link, useLoaderData } from "@remix-run/react";
 import { UserInterface } from "~/types/user";
 
 export let loader: LoaderFunction = async ({ params }) => {
@@ -24,18 +24,44 @@ export let loader: LoaderFunction = async ({ params }) => {
 export default function Users() {
   const user = useLoaderData<UserInterface>();
 
-  console.log(user);
-
   return (
-    <div>
-      <h1>User Details</h1>
+    <div className='flex items-center justify-center flex-col'>
       <div>
-        <h2>{user.name}</h2>
-        <p>Email: {user.email}</p>
-        <p>
-          User: {user.address.street}, {user.address.city},{" "}
-          {user.address.zipcode}
-        </p>
+        <h1 className='font-semibold text-3xl py-2'> Users: </h1>
+        <div>
+          <h2>{user.name}</h2>
+          <p className='flex items-center gap-2'>
+            Website:{" "}
+            <Link
+              to={`mailto:${user.email}`}
+              className='text-yellow-600 flex items-center gap-2 underline underline-offset-4'
+            >
+              Email: {user.email}
+            </Link>
+          </p>
+          <ul>
+            <li>
+              City: <span className='text-gray-400'> {user.address.city},</span>
+            </li>
+            <li>
+              Street:{" "}
+              <span className='text-gray-400'> {user.address.street}, </span>
+            </li>
+            <li>
+              Zipcode:{" "}
+              <span className='text-gray-400'> {user.address.zipcode}</span>
+            </li>
+          </ul>
+          <p className='flex items-center gap-2'>
+            Website:{" "}
+            <Link
+              to={`https://${user.website}`}
+              className='text-yellow-600 flex items-center gap-2 underline underline-offset-4'
+            >
+              {user.website}
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );
